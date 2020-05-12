@@ -10,28 +10,14 @@ module.exports = {
   deleteUser
 };
 
-// function firstMidFromGetUsers(req, res, next) {
-//   console.log("firs mid from users");
-//   next({ message: 'error from firstMid' });
-// }
-// function firstMidFromGetSettings(req, res, next) {
-//   console.log("firs mid from settings");
-//   next();
-// }
-
-// function getUsers(req, res, next) {
-// function getUsers(req, res, next) {
-//   console.log('QUERY', req.query);
-//   return res.json({ data: 'Message success GET'});
-// }
-
 function getUsers(req, res, next) {
   User.find(function (err, result) {
     if (err) {
       return next(err)
     }
 
-    return res.json({ data: result });
+    req.resources.users = result;
+    next();
   })
 }
 
@@ -41,7 +27,8 @@ function getUsersById(req, res, next) {
       return next(err)
     }
 
-    return res.json({ data: result })
+    req.resources.users = result;
+    next();
   })
 }
 
@@ -53,7 +40,8 @@ function createUser(req, res, next) {
       return next(err)
     }
 
-    return res.json({ data: result });
+    req.resources.users = result;
+    next();
   })
 }
 
@@ -63,7 +51,8 @@ function updateUser(req, res, next) {
       return next(err)
     }
 
-    return res.json({ data: result })
+    req.resources.users = result;
+    next();
   })
 }
 
@@ -73,7 +62,8 @@ function deleteUser(req, res, next) {
     if (err) {
       return next(err)
     }
-
-    return res.json({ message: `User with id: ${userId} was deleted`, data: result });
+    
+    req.resources.users = result;
+    next();
   })
 }

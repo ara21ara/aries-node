@@ -19,7 +19,8 @@ function getPets(req, res, next) {
         return next(err)
       }
 
-      return res.json({ data: result })
+      req.resources.pets = result;
+      next();
     })
 }
 
@@ -33,7 +34,8 @@ function getPetById(req, res, next) {
         console.log('err', err)
       }
 
-      return res.json({ data: result })
+      req.resources.pets = result;
+      next();
     })
 }
 
@@ -45,7 +47,8 @@ function createPet(req, res, next) {
       return next(err)
     }
 
-    return res.json({ data: result })
+    req.resources.pets = result;
+    next();
   })
 }
 
@@ -56,7 +59,8 @@ function updatePet(req, res, next) {
       return next(err)
     }
 
-    return res.json({ data: result })
+    req.resources.pets = result;
+    next();
   })
 }
 
@@ -67,6 +71,7 @@ function deletePet(req, res, next) {
       return next(err)
     }
 
-    return res.json({ message: `Pet with id: ${petId} was deleted`, data: result })
+    req.resources.pets = result;
+    next()
   })
 }
