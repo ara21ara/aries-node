@@ -72,5 +72,6 @@ function deletePet(req, res, next) {
     }
 
     req.resources.pets = result;
+    next();
   })
 }
